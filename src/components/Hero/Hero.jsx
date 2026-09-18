@@ -87,7 +87,7 @@ function Hero() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    <img src="/profile.jpg" alt="Bhumika Rathod" className="hero-img" />
+                    <img src="https://api.dicebear.com/7.x/initials/svg?seed=Bhumika Rathod&backgroundColor=16181D" alt="Bhumika Rathod" className="hero-img" />
                 </motion.div>
             </div>
         </section>
