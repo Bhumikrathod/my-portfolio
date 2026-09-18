@@ -1,0 +1,191 @@
+.admin-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #16181D;
+    cursor: auto !important;
+}
+
+.admin-login * {
+    cursor: auto !important;
+}
+
+.admin-login-form {
+    background-color: #1E2127;
+    padding: 2.5rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin-login-form h2 {
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.admin-login-form input {
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #33373E;
+    background-color: #16181D;
+    color: white;
+    font-size: 1rem;
+}
+
+.admin-login-form button {
+    padding: 0.75rem;
+    background-color: #FFB100;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.admin-dashboard {
+    min-height: 100vh;
+    background-color: #F1F3F4;
+    padding: 1.5rem;
+    cursor: auto !important;
+}
+
+.admin-dashboard * {
+    cursor: auto !important;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.admin-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #16181D;
+}
+
+.logout-btn {
+    padding: 0.5rem 1rem;
+    background-color: #16181D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border: 1px solid #E0E3E5;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.tab.active {
+    background-color: #FFB100;
+    border-color: #FFB100;
+    font-weight: 600;
+}
+
+.manager {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.admin-form {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 500px;
+}
+
+.admin-form input,
+.admin-form textarea {
+    padding: 0.7rem;
+    border-radius: 6px;
+    border: 1px solid #E0E3E5;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.admin-form button {
+    padding: 0.7rem;
+    background-color: #FFB100;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: fit-content;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.admin-list-item {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.admin-list-item strong {
+    color: #16181D;
+}
+
+.admin-list-item p {
+    color: #5A5F66;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+.item-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.item-actions button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    background-color: #F1F3F4;
+}
+
+.item-actions button:last-child {
+    background-color: #ffe0e0;
+    color: #c0392b;
+}

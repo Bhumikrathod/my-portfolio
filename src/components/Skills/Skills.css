@@ -1,32 +1,50 @@
 .skills {
-    padding: 3rem 1.5rem;
-    text-align: center;
+    padding: 4rem 1.5rem;
+    max-width: 750px;
+    margin: 0 auto;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-top: 1.5rem;
+.skills .section-title {
+    text-align: left;
+    margin-bottom: 2rem;
 }
 
-.skill-card {
-    background-color: #1a1a2e;
-    color: white;
-    padding: 1rem;
-    border-radius: 10px;
+.skills-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.skill-group h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    color: var(--forest);
+    margin-bottom: 0.7rem;
+}
+
+.pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.pill {
+    background-color: var(--paper);
+    color: var(--ink);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 500;
-    transition: transform 0.3s ease;
+    border: 1px solid #E0E3E5;
 }
 
-.skill-card:hover {
-    transform: translateY(-5px);
-    background-color: #e94560;
+.pill {
+    cursor: default;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-@media (min-width: 768px) {
-    .skills-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-    }
+.pill:hover {
+    background-color: var(--ink);
+    color: var(--white);
+    transform: translateY(-3px);
 }

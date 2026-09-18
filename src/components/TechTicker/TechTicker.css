@@ -1,0 +1,36 @@
+.ticker-wrap {
+    background-color: var(--ink);
+    overflow: hidden;
+    padding: 1rem 0;
+    border-top: 1px solid #2A2D33;
+    border-bottom: 1px solid #2A2D33;
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: scrollTicker 22s linear infinite;
+}
+
+.ticker-item {
+    color: #7A7F87;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    padding: 0 2rem;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.ticker-item:hover {
+    color: var(--amber);
+}
+
+@keyframes scrollTicker {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}

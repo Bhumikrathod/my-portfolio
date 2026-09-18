@@ -1,0 +1,23 @@
+.page-intro {
+    position: fixed;
+    inset: 0;
+    background-color: #16181D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.intro-bracket {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    color: #FFB100;
+    font-weight: 600;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .intro-bracket {
+        font-size: 2.5rem;
+    }
+}

@@ -1,0 +1,15 @@
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--amber);
+    color: var(--ink);
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 40;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}

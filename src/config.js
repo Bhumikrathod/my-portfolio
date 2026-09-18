@@ -1,0 +1,1 @@
+export const API_BASE = 'https://portfolio-backend-gyug.onrender.com/api';

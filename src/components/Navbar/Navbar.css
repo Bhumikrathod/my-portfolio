@@ -1,37 +1,119 @@
 .navbar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: #1a1a2e;
-    color: white;
+    padding: 1rem 1.5rem;
+    background-color: var(--ink-fixed);
+    color: var(--white-fixed);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(22, 24, 29, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 0.7rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    z-index: 20;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white-fixed);
+    transition: all 0.3s ease;
+}
+
+.bar.open:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.bar.open:nth-child(2) {
+    opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 .nav-links {
     list-style: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 70%;
+    background-color: var(--ink-fixed);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-    margin-top: 0.5rem;
+    justify-content: center;
+    gap: 2rem;
+    transition: right 0.4s ease;
+}
+
+.nav-links.active {
+    right: 0;
 }
 
 .nav-links a {
-    color: white;
+    color: var(--white-fixed);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    position: relative;
 }
 
-/* Tablet aur usse bada screen ke liye */
+.nav-links a:hover {
+    color: var(--amber);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background-color: var(--amber);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
-    .navbar {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 1.5rem 3rem;
+    .hamburger {
+        display: none;
     }
 
     .nav-links {
+        position: static;
         flex-direction: row;
-        gap: 2rem;
+        height: auto;
+        width: auto;
+        background-color: transparent;
+        gap: 1.8rem;
+    }
+
+    .nav-links a {
+        font-size: 0.95rem;
+        font-weight: 500;
     }
 }
