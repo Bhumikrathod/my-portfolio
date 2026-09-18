@@ -35,7 +35,7 @@ function AdminDashboard() {
             </div>
 
             <div className="admin-tabs">
-                {['projects', 'skills', 'experience', 'certifications', 'testimonials', 'messages'].map((tab) => (
+                {['projects', 'skills', 'experience', 'certifications', 'testimonials', 'social', 'messages'].map((tab) => (
                     <button
                         key={tab}
                         className={activeTab === tab ? 'tab active' : 'tab'}
@@ -53,6 +53,7 @@ function AdminDashboard() {
                 {activeTab === 'certifications' && <CertificationsManager />}
                 {activeTab === 'messages' && <MessagesManager />}
                 {activeTab === 'testimonials' && <TestimonialsManager />}
+                {activeTab === 'social' && <SocialLinksManager />}
             </div>
         </div>
     );
@@ -350,6 +351,65 @@ function TestimonialsManager() {
                 {items.map(item => (
                     <div className="admin-list-item" key={item.id}>
                         <div><strong>{item.name}</strong><p>{item.message}</p></div>
+                        <div className="item-actions">
+                            <button onClick={() => handleEdit(item)}>Edit</button>
+                            <button onClick={() => handleDelete(item.id)}>Delete</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function SocialLinksManager() {
+    const [items, setItems] = useState([]);
+    const [form, setForm] = useState({ platform: '', url: '' });
+    const [editId, setEditId] = useState(null);
+
+    const load = () => fetch(`${API}/social-links`).then(r => r.json()).then(setItems);
+    useEffect(() => { load(); }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const url = editId ? `${API}/social-links/${editId}` : `${API}/social-links`;
+        const method = editId ? 'PUT' : 'POST';
+        await fetch(url, { method, headers: getHeaders(), body: JSON.stringify(form) });
+        setForm({ platform: '', url: '' });
+        setEditId(null);
+        load();
+    };
+
+    const handleEdit = (item) => {
+        setForm({ platform: item.platform, url: item.url });
+        setEditId(item.id);
+    };
+
+    const handleDelete = async (id) => {
+        await fetch(`${API}/social-links/${id}`, { method: 'DELETE', headers: getHeaders() });
+        load();
+    };
+
+    return (
+        <div className="manager">
+            <form className="admin-form" onSubmit={handleSubmit}>
+                <select value={form.platform} onChange={e => setForm({ ...form, platform: e.target.value })} required style={{ padding: '0.7rem', borderRadius: '6px', border: '1px solid #E0E3E5' }}>
+                    <option value="">Select Platform</option>
+                    <option value="GitHub">GitHub</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="YouTube">YouTube</option>
+                    <option value="Twitter">Twitter</option>
+                </select>
+                <input placeholder="Profile URL" value={form.url} onChange={e => setForm({ ...form, url: e.target.value })} required />
+                <button type="submit">{editId ? 'Update' : 'Add'} Link</button>
+                {editId && <button type="button" onClick={() => { setEditId(null); setForm({ platform: '', url: '' }); }}>Cancel</button>}
+            </form>
+
+            <div className="admin-list">
+                {items.map(item => (
+                    <div className="admin-list-item" key={item.id}>
+                        <div><strong>{item.platform}</strong><p>{item.url}</p></div>
                         <div className="item-actions">
                             <button onClick={() => handleEdit(item)}>Edit</button>
                             <button onClick={() => handleDelete(item.id)}>Delete</button>

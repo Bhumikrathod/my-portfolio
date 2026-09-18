@@ -1,12 +1,22 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaTwitter, FaGlobe } from 'react-icons/fa';
 import MagneticButton from '../MagneticButton/MagneticButton';
+import { API_BASE } from '../../config';
 import './Hero.css';
+
+const iconMap = {
+    GitHub: FaGithub,
+    LinkedIn: FaLinkedin,
+    Instagram: FaInstagram,
+    YouTube: FaYoutube,
+    Twitter: FaTwitter
+};
 
 function Hero() {
     const fullText = "Aspiring Full Stack Developer building with React and Python.";
     const [displayedText, setDisplayedText] = useState('');
+    const [socialLinks, setSocialLinks] = useState([]);
     const heroRef = useRef(null);
 
     useEffect(() => {
@@ -17,6 +27,13 @@ function Hero() {
             if (index === fullText.length) clearInterval(interval);
         }, 35);
         return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        fetch(`${API_BASE}/social-links`)
+            .then((res) => res.json())
+            .then(setSocialLinks)
+            .catch((err) => console.error(err));
     }, []);
 
     const handleMouseMove = (e) => {
@@ -48,8 +65,14 @@ function Hero() {
                     </p>
 
                     <div className="hero-socials">
-                        <a href="https://github.com/Bhumikrathod" target="_blank" rel="noreferrer"><FaGithub /></a>
-                        <a href="https://www.linkedin.com/in/bhumika-rathod-7651b42b2" target="_blank" rel="noreferrer"><FaLinkedin /></a>
+                        {socialLinks.map((link) => {
+                            const Icon = iconMap[link.platform] || FaGlobe;
+                            return (
+                                <a href={link.url} target="_blank" rel="noreferrer" key={link.id}>
+                                    <Icon />
+                                </a>
+                            );
+                        })}
                     </div>
 
                     <div className="hero-buttons">
@@ -64,8 +87,7 @@ function Hero() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    <img src="https://api.dicebear.com/7.x/initials/svg?seed=Bhumika Rathod&backgroundColor=16181D" alt="Bhumika Rathod" className="hero-img" />
-
+                    <img src="/profile.jpg" alt="Bhumika Rathod" className="hero-img" />
                 </motion.div>
             </div>
         </section>
@@ -73,4 +95,3 @@ function Hero() {
 }
 
 export default Hero;
-
