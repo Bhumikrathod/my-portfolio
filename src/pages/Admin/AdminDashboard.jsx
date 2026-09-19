@@ -453,15 +453,17 @@ function VideosManager() {
     return (
         <div className="manager">
             <form className="admin-form" onSubmit={handleSubmit}>
-                <input placeholder="Video Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} required />
+                <input placeholder="Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} required />
                 <select value={form.platform} onChange={e => setForm({ ...form, platform: e.target.value })} required style={{ padding: '0.7rem', borderRadius: '6px', border: '1px solid #E0E3E5' }}>
-                    <option value="">Select Platform</option>
-                    <option value="YouTube">YouTube</option>
-                    <option value="Instagram">Instagram</option>
+                    <option value="">Select Type</option>
+                    <option value="YouTube">YouTube Video</option>
+                    <option value="Instagram">Instagram Reel/Post</option>
+                    <option value="Facebook">Facebook Post</option>
+                    <option value="Image">Direct Image</option>
                     <option value="Other">Other</option>
                 </select>
-                <input placeholder="Video URL" value={form.url} onChange={e => setForm({ ...form, url: e.target.value })} required />
-                <button type="submit">{editId ? 'Update' : 'Add'} Video</button>
+                <input placeholder="URL (video link, or direct image link)" value={form.url} onChange={e => setForm({ ...form, url: e.target.value })} required />
+                <button type="submit">{editId ? 'Update' : 'Add'} Media</button>
                 {editId && <button type="button" onClick={() => { setEditId(null); setForm({ title: '', platform: '', url: '' }); }}>Cancel</button>}
             </form>
 

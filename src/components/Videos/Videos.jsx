@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaPlay, FaYoutube, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaPlay, FaYoutube, FaInstagram, FaFacebook, FaExternalLinkAlt } from 'react-icons/fa';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
 import { API_BASE } from '../../config';
 import './Videos.css';
 
-// YouTube URL se video ID nikaalne ka function
 function getYouTubeId(url) {
     const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/;
     const match = url.match(regex);
     return match ? match[1] : null;
 }
 
-function VideoCard({ video, index }) {
-    const isYouTube = video.platform === 'YouTube';
-    const youtubeId = isYouTube ? getYouTubeId(video.url) : null;
+const platformIcons = {
+    YouTube: FaYoutube,
+    Instagram: FaInstagram,
+    Facebook: FaFacebook
+};
+
+function MediaCard({ item, index }) {
+    const isYouTube = item.platform === 'YouTube';
+    const isImage = item.platform === 'Image';
+    const youtubeId = isYouTube ? getYouTubeId(item.url) : null;
+    const Icon = platformIcons[item.platform] || FaPlay;
 
     return (
         <motion.div
@@ -28,26 +35,29 @@ function VideoCard({ video, index }) {
                 <div className="video-embed">
                     <iframe
                         src={`https://www.youtube.com/embed/${youtubeId}`}
-                        title={video.title}
+                        title={item.title}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     ></iframe>
                 </div>
+            ) : isImage ? (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                    <img src={item.url} alt={item.title} className="video-image" />
+                </a>
             ) : (
-                <a href={video.url} target="_blank" rel="noreferrer" className="video-link-card">
+                <a href={item.url} target="_blank" rel="noreferrer" className="video-link-card">
                     <div className="video-placeholder">
-                        {video.platform === 'Instagram' ? <FaInstagram /> : <FaPlay />}
-                        <span>Watch on {video.platform}</span>
+                        <Icon />
+                        <span>View on {item.platform}</span>
                     </div>
                 </a>
             )}
             <div className="video-info">
-                <h4>{video.title}</h4>
+                <h4>{item.title}</h4>
                 <span className="video-platform">
-                    {video.platform === 'YouTube' && <FaYoutube />}
-                    {video.platform === 'Instagram' && <FaInstagram />}
-                    {video.platform} <FaExternalLinkAlt className="ext-icon" />
+                    <Icon /> {item.platform}
+                    {item.platform !== 'YouTube' && item.platform !== 'Image' && <FaExternalLinkAlt className="ext-icon" />}
                 </span>
             </div>
         </motion.div>
@@ -55,17 +65,17 @@ function VideoCard({ video, index }) {
 }
 
 function Videos() {
-    const [videos, setVideos] = useState([]);
+    const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`${API_BASE}/videos`)
             .then((res) => res.json())
-            .then((data) => { setVideos(data); setLoading(false); })
+            .then((data) => { setItems(data); setLoading(false); })
             .catch((err) => { console.error(err); setLoading(false); });
     }, []);
 
-    if (!loading && videos.length === 0) return null;
+    if (!loading && items.length === 0) return null;
 
     return (
         <section className="videos-section" id="videos">
@@ -77,7 +87,7 @@ function Videos() {
                 transition={{ duration: 0.6 }}
             >
                 <span className="section-eyebrow">// Media</span>
-                <h2 className="section-title">Videos</h2>
+                <h2 className="section-title">Videos &amp; Media</h2>
                 <div className="section-underline"></div>
             </motion.div>
 
@@ -85,8 +95,8 @@ function Videos() {
                 <SkeletonCard count={2} />
             ) : (
                 <div className="videos-grid">
-                    {videos.map((video, index) => (
-                        <VideoCard video={video} index={index} key={video.id} />
+                    {items.map((item, index) => (
+                        <MediaCard item={item} index={index} key={item.id} />
                     ))}
                 </div>
             )}
