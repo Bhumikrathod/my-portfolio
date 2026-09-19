@@ -10,6 +10,7 @@ import Experience from '../../components/Experience/Experience';
 import Skills from '../../components/Skills/Skills';
 import Certifications from '../../components/Certifications/Certifications';
 import Projects from '../../components/Projects/Projects';
+import Videos from '../../components/Videos/Videos';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import Contact from '../../components/Contact/Contact';
 import Footer from '../../components/Footer/Footer';
@@ -30,6 +31,7 @@ function Portfolio() {
             <Skills />
             <Certifications />
             <Projects />
+            <Videos />
             <Testimonials />
             <Contact />
             <Footer />
