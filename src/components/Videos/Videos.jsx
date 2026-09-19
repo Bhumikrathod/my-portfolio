@@ -45,6 +45,15 @@ function MediaCard({ item, index }) {
                 <a href={item.url} target="_blank" rel="noreferrer">
                     <img src={item.url} alt={item.title} className="video-image" />
                 </a>
+            ) : item.thumbnail_url ? (
+                <a href={item.url} target="_blank" rel="noreferrer" className="video-link-card">
+                    <div className="video-thumb-wrap">
+                        <img src={item.thumbnail_url} alt={item.title} className="video-image" />
+                        <div className="video-overlay">
+                            <Icon />
+                        </div>
+                    </div>
+                </a>
             ) : (
                 <a href={item.url} target="_blank" rel="noreferrer" className="video-link-card">
                     <div className="video-placeholder">

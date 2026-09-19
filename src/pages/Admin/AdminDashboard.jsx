@@ -424,7 +424,7 @@ function SocialLinksManager() {
 
 function VideosManager() {
     const [items, setItems] = useState([]);
-    const [form, setForm] = useState({ title: '', platform: '', url: '' });
+    const [form, setForm] = useState({ title: '', platform: '', url: '', thumbnail_url: '' });
     const [editId, setEditId] = useState(null);
 
     const load = () => fetch(`${API}/videos`).then(r => r.json()).then(setItems);
@@ -435,13 +435,13 @@ function VideosManager() {
         const url = editId ? `${API}/videos/${editId}` : `${API}/videos`;
         const method = editId ? 'PUT' : 'POST';
         await fetch(url, { method, headers: getHeaders(), body: JSON.stringify(form) });
-        setForm({ title: '', platform: '', url: '' });
+        setForm({ title: '', platform: '', url: '', thumbnail_url: '' });
         setEditId(null);
         load();
     };
 
     const handleEdit = (item) => {
-        setForm({ title: item.title, platform: item.platform, url: item.url });
+        setForm({ title: item.title, platform: item.platform, url: item.url, thumbnail_url: item.thumbnail_url || '' });
         setEditId(item.id);
     };
 
@@ -462,9 +462,10 @@ function VideosManager() {
                     <option value="Image">Direct Image</option>
                     <option value="Other">Other</option>
                 </select>
-                <input placeholder="URL (video link, or direct image link)" value={form.url} onChange={e => setForm({ ...form, url: e.target.value })} required />
+                <input placeholder="URL (video/post link)" value={form.url} onChange={e => setForm({ ...form, url: e.target.value })} required />
+                <input placeholder="Thumbnail Image URL (for Instagram/Facebook - optional)" value={form.thumbnail_url} onChange={e => setForm({ ...form, thumbnail_url: e.target.value })} />
                 <button type="submit">{editId ? 'Update' : 'Add'} Media</button>
-                {editId && <button type="button" onClick={() => { setEditId(null); setForm({ title: '', platform: '', url: '' }); }}>Cancel</button>}
+                {editId && <button type="button" onClick={() => { setEditId(null); setForm({ title: '', platform: '', url: '', thumbnail_url: '' }); }}>Cancel</button>}
             </form>
 
             <div className="admin-list">
